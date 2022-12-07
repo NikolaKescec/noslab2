@@ -1,0 +1,1 @@
+cmd_/home/rikola-pass/noslab2/b/module/Module.symvers := sed 's/\.ko$$/\.o/' /home/rikola-pass/noslab2/b/module/modules.order | scripts/mod/modpost -m -a  -o /home/rikola-pass/noslab2/b/module/Module.symvers -e -i Module.symvers   -T -
