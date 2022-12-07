@@ -18,13 +18,17 @@ void cleanup() {
 
     for (int i = 0; i < number_of_descriptors; i++) {
         free(device_names[i]);
-
         close(pollfds[i].fd);
-        free(&pollfds[i]);
     }
 
+    printf("Cleanud up and closed descriptors.");
+
+    free(pollfds);
     free(device_names);
+
+    printf("Cleanup completed.");
 }
+
 
 char *retrieve_device_name(int number) {
     char *device_name = (char *) malloc(6 * sizeof(char));
@@ -49,7 +53,7 @@ int main(int argc, char const *argv[]) {
     for (int i = 0; i < number_of_descriptors; i++) {
         device_names[i] = retrieve_device_name(i);
 
-        pollfds[0].fd = open(device_names[i], O_WRONLY);
+        pollfds[i].fd = open(device_names[i], O_WRONLY);
         if (pollfds[i].fd == -1) {
             cleanup();
             ERROR_EXIT("open");
@@ -85,7 +89,7 @@ int main(int argc, char const *argv[]) {
                     ERROR_EXIT("Invalid writing.");
                 }
 
-                printf("Written character %c to %d: \n", c, randomly_selected);
+                printf("Written character %c to %d \n", c, randomly_selected);
                 break;
             }
         }

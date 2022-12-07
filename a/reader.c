@@ -17,12 +17,15 @@ void cleanup() {
 
     for (int i = 0; i < number_of_descriptors; i++) {
         free(device_names[i]);
-
         close(pollfds[i].fd);
-        free(&pollfds[i]);
     }
 
+    printf("Cleanud up and closed descriptors.");
+
+    free(pollfds);
     free(device_names);
+
+    printf("Cleanup completed.");
 }
 
 char *retrieve_device_name(int number) {
@@ -33,12 +36,16 @@ char *retrieve_device_name(int number) {
 }
 
 int main(int argc, char const *argv[]) {
+    nfds_t ndfs;
+
     if (argc < 2) // no arguments were passed
     {
         ERROR_EXIT("No arguments given! Supply number of files to poll for reading.\n");
     }
 
     sscanf(argv[1], "%d", &number_of_descriptors);
+
+    ndfs = number_of_descriptors;
 
     pollfds = calloc(number_of_descriptors, sizeof(struct pollfd));
     device_names = (char **) malloc(number_of_descriptors * sizeof(char *));
@@ -48,7 +55,7 @@ int main(int argc, char const *argv[]) {
     for (int i = 0; i < number_of_descriptors; i++) {
         device_names[i] = retrieve_device_name(i);
 
-        pollfds[0].fd = open(device_names[i], O_RDONLY);
+        pollfds[i].fd = open(device_names[i], O_RDONLY);
         if (pollfds[i].fd == -1) {
             cleanup();
             ERROR_EXIT("open");
@@ -62,13 +69,13 @@ int main(int argc, char const *argv[]) {
 
         printf("Polling.\n");
 
-        ready = poll(pollfds, number_of_descriptors, -1);
+        ready = poll(pollfds, ndfs, -1);
         if (ready == -1) {
             cleanup();
             ERROR_EXIT("poll");
         }
 
-        printf("Number of ready files to read to: %d\n", ready);
+        printf("Number of ready files to read from: %d\n", ready);
 
         for (int i = 0; i < number_of_descriptors; i++) {
             char c;
@@ -81,7 +88,7 @@ int main(int argc, char const *argv[]) {
                     ERROR_EXIT("Invalid reading.");
                 }
 
-                printf("From %d character %c: \n", i, c);
+                printf("From %d character: %c \n", i, c);
             }
         }
     }
