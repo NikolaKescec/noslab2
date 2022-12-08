@@ -1,4 +1,4 @@
-cmd_/home/rikola-pass/noslab2/b/module/shofer.o := gcc -Wp,-MMD,/home/rikola-pass/noslab2/b/module/.shofer.o.d  -nostdinc -isystem /usr/lib/gcc/x86_64-linux-gnu/9/include -I./arch/x86/include -I./arch/x86/include/generated  -I./include -I./arch/x86/include/uapi -I./arch/x86/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/compiler-version.h -include ./include/linux/kconfig.h -I./ubuntu/include -include ./include/linux/compiler_types.h -D__KERNEL__ -fmacro-prefix-map=./= -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Wno-format-security -std=gnu89 -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -fcf-protection=none -m64 -falign-jumps=1 -falign-loops=1 -mno-80387 -mno-fp-ret-in-387 -mpreferred-stack-boundary=3 -mskip-rax-setup -mtune=generic -mno-red-zone -mcmodel=kernel -DCONFIG_X86_X32_ABI -Wno-sign-compare -fno-asynchronous-unwind-tables -mindirect-branch=thunk-extern -mindirect-branch-register -mfunction-return=thunk-extern -fno-jump-tables -fno-delete-null-pointer-checks -Wno-frame-address -Wno-format-truncation -Wno-format-overflow -Wno-address-of-packed-member -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fstack-protector-strong -Wimplicit-fallthrough=5 -Wno-main -Wno-unused-but-set-variable -Wno-unused-const-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-stack-clash-protection -g -pg -mrecord-mcount -mfentry -DCC_USING_FENTRY -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-stringop-truncation -Wno-array-bounds -Wno-stringop-overflow -Wno-restrict -Wno-maybe-uninitialized -fno-strict-overflow -fno-stack-check -fconserve-stack -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -Wno-packed-not-aligned -DSHOFER_DEBUG  -fsanitize=bounds -fsanitize=shift -fsanitize=bool -fsanitize=enum  -DMODULE  -DKBUILD_BASENAME='"shofer"' -DKBUILD_MODNAME='"shofer"' -D__KBUILD_MODNAME=kmod_shofer -c -o /home/rikola-pass/noslab2/b/module/shofer.o /home/rikola-pass/noslab2/b/module/shofer.c
+cmd_/home/rikola-pass/noslab2/b/module/shofer.o := gcc -Wp,-MMD,/home/rikola-pass/noslab2/b/module/.shofer.o.d  -nostdinc -isystem /usr/lib/gcc/x86_64-linux-gnu/9/include -I./arch/x86/include -I./arch/x86/include/generated  -I./include -I./arch/x86/include/uapi -I./arch/x86/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/compiler-version.h -include ./include/linux/kconfig.h -I./ubuntu/include -include ./include/linux/compiler_types.h -D__KERNEL__ -fmacro-prefix-map=./= -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Wno-format-security -std=gnu89 -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -fcf-protection=none -m64 -falign-jumps=1 -falign-loops=1 -mno-80387 -mno-fp-ret-in-387 -mpreferred-stack-boundary=3 -mskip-rax-setup -mtune=generic -mno-red-zone -mcmodel=kernel -DCONFIG_X86_X32_ABI -Wno-sign-compare -fno-asynchronous-unwind-tables -mindirect-branch=thunk-extern -mindirect-branch-register -mfunction-return=thunk-extern -fno-jump-tables -fno-delete-null-pointer-checks -Wno-frame-address -Wno-format-truncation -Wno-format-overflow -Wno-address-of-packed-member -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fstack-protector-strong -Wimplicit-fallthrough=5 -Wno-main -Wno-unused-but-set-variable -Wno-unused-const-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-stack-clash-protection -g -pg -mrecord-mcount -mfentry -DCC_USING_FENTRY -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-stringop-truncation -Wno-array-bounds -Wno-stringop-overflow -Wno-restrict -Wno-maybe-uninitialized -Wno-alloc-size-larger-than -fno-strict-overflow -fno-stack-check -fconserve-stack -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -Wno-packed-not-aligned -DSHOFER_DEBUG  -fsanitize=bounds -fsanitize=shift -fsanitize=bool -fsanitize=enum  -DMODULE  -DKBUILD_BASENAME='"shofer"' -DKBUILD_MODNAME='"shofer"' -D__KBUILD_MODNAME=kmod_shofer -c -o /home/rikola-pass/noslab2/b/module/shofer.o /home/rikola-pass/noslab2/b/module/shofer.c
 
 source_/home/rikola-pass/noslab2/b/module/shofer.o := /home/rikola-pass/noslab2/b/module/shofer.c
 
@@ -236,6 +236,7 @@ deps_/home/rikola-pass/noslab2/b/module/shofer.o := \
   include/linux/timex.h \
   include/uapi/linux/timex.h \
   arch/x86/include/asm/timex.h \
+    $(wildcard include/config/X86_TSC) \
   arch/x86/include/asm/processor.h \
     $(wildcard include/config/X86_VMX_FEATURE_NAMES) \
     $(wildcard include/config/X86_IOPL_IOPERM) \
@@ -390,7 +391,6 @@ deps_/home/rikola-pass/noslab2/b/module/shofer.o := \
   include/uapi/linux/personality.h \
   include/linux/err.h \
   arch/x86/include/asm/tsc.h \
-    $(wildcard include/config/X86_TSC) \
   arch/x86/include/asm/cpufeature.h \
     $(wildcard include/config/X86_FEATURE_NAMES) \
   include/vdso/time32.h \
@@ -868,6 +868,7 @@ deps_/home/rikola-pass/noslab2/b/module/shofer.o := \
   arch/x86/include/asm/uaccess.h \
     $(wildcard include/config/CC_HAS_ASM_GOTO_OUTPUT) \
     $(wildcard include/config/CC_ASM_GOTO_OUTPUT) \
+    $(wildcard include/config/CC_HAS_ASM_GOTO_TIED_OUTPUT) \
     $(wildcard include/config/ARCH_HAS_COPY_MC) \
     $(wildcard include/config/X86_INTEL_USERCOPY) \
   arch/x86/include/asm/smap.h \
@@ -896,6 +897,7 @@ deps_/home/rikola-pass/noslab2/b/module/shofer.o := \
   include/uapi/linux/ioprio.h \
   include/linux/fs_types.h \
   include/linux/mount.h \
+  include/linux/mnt_idmapping.h \
   include/uapi/linux/fs.h \
   include/linux/quota.h \
     $(wildcard include/config/QUOTA_NETLINK_INTERFACE) \
@@ -1040,7 +1042,6 @@ deps_/home/rikola-pass/noslab2/b/module/shofer.o := \
     $(wildcard include/config/GENERIC_IOMAP) \
     $(wildcard include/config/GENERIC_IOREMAP) \
     $(wildcard include/config/VIRT_TO_BUS) \
-    $(wildcard include/config/GENERIC_DEVMEM_IS_ALLOWED) \
   include/linux/logic_pio.h \
     $(wildcard include/config/INDIRECT_PIO) \
   include/linux/fwnode.h \

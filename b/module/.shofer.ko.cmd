@@ -1,1 +1,1 @@
-cmd_/home/rikola-pass/noslab2/b/module/shofer.ko := ld -r  -m elf_x86_64  --build-id=sha1  -T scripts/module.lds -o /home/rikola-pass/noslab2/b/module/shofer.ko /home/rikola-pass/noslab2/b/module/shofer.o /home/rikola-pass/noslab2/b/module/shofer.mod.o;  true
+cmd_/home/rikola-pass/noslab2/b/module/shofer.ko := ld -r  -m elf_x86_64 -z noexecstack   --build-id=sha1  -T scripts/module.lds -o /home/rikola-pass/noslab2/b/module/shofer.ko /home/rikola-pass/noslab2/b/module/shofer.o /home/rikola-pass/noslab2/b/module/shofer.mod.o;  true
