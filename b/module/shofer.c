@@ -319,8 +319,6 @@ static ssize_t shofer_write(struct file *filp, const char __user *ubuf,
 	spin_unlock(&in_buff->key);
 
 	return retval;
-
-	return count;
 }
 
 static long control_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
@@ -343,39 +341,41 @@ static long control_ioctl(struct file *filp, unsigned int cmd, unsigned long arg
 	spin_lock(&out_buff->key);
 	spin_lock(&in_buff->key);
 
-	dump_buffer("timer-start:in_buff", in_buff);
-	dump_buffer("timer-start:out_buff", out_buff);
+	dump_buffer("ioctl-start:in_buff", in_buff);
+	dump_buffer("ioctl-start:out_buff", out_buff);
 
-	if (kfifo_len(fifo_in) >= cmd && kfifo_avail(fifo_out) >= cmd)
+	for (; retval < cmd; retval++)
 	{
-		got = kfifo_out(fifo_in, &copy_buff, cmd);
-		if (got > 0)
+		if (kfifo_len(fifo_in) > 0 && kfifo_avail(fifo_out) > 0)
 		{
-			got = kfifo_in(fifo_out, &copy_buff, cmd);
+			char c;
+			got = kfifo_get(fifo_in, &c);
 			if (got > 0)
 			{
-				LOG("ioctl moved '%s' from in to out", copy_buff);
+				got = kfifo_put(fifo_out, c);
+				if (got)
+				{
+					LOG("ioctl moved '%c' from in to out", c);
+				}
+				else /* should't happen! */
+				{
+					klog(KERN_WARNING, "kfifo_put failed\n");
+				}
 			}
 			else
-			{
-				/* should't happen! */
-				klog(KERN_WARNING, "kfifo_in failed\n");
-				retval = -EINVAL;
+			{ /* should't happen! */
+				klog(KERN_WARNING, "kfifo_get failed\n");
 			}
 		}
 		else
-		{ /* should't happen! */
-			klog(KERN_WARNING, "kfifo_out failed\n");
-			retval = -EINVAL;
+		{
+			LOG("ioctl: nothing in input buffer");
+			break;
 		}
 	}
-	else
-	{
-		LOG("ioctl: buffer either too full or too empty");
-	}
 
-	dump_buffer("timer-end:in_buff", in_buff);
-	dump_buffer("timer-end:out_buff", out_buff);
+	dump_buffer("ioctl-end:in_buff", in_buff);
+	dump_buffer("ioctl-end:out_buff", out_buff);
 
 	spin_unlock(&in_buff->key);
 	spin_unlock(&out_buff->key);

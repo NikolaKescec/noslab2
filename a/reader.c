@@ -103,7 +103,7 @@ int main(int argc, char const *argv[])
                     ERROR_EXIT("Invalid reading.");
                 }
 
-                printf("From %d character: %c \n", i, c);
+                printf("From %d character: %c\n", i, c);
             }
         }
     }
